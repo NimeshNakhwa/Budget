@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './core/components/layout/landing/landing.component';
+import { BudgetAllocatedComponent } from './budget-allocated/budget-allocated.component';
+import { BudgetUtilisedComponent } from './budget-utilised/budget-utilised.component';
 
 const routes: Routes = [
   {
@@ -14,6 +16,14 @@ const routes: Routes = [
   {
     path:'dashboard',
     component: LandingComponent,
+  },
+  {
+    path:'budeget_allocated',
+    component: BudgetAllocatedComponent,
+  },
+  {
+    path:'budeget_utilised',
+    component: BudgetUtilisedComponent,
   },
   {
     path:'dashboard',
