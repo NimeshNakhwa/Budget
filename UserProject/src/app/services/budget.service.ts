@@ -1,4 +1,3 @@
-// filepath: c:\Users\Nimesh\Desktop\Frontend fsd\Budget\UserProject\src\app\services\budget.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,7 +10,19 @@ export class BudgetService {
 
   constructor(private http: HttpClient) {}
 
-  createBudget(budget: { category: string; amount: number }): Observable<any> {
-    return this.http.post(this.apiUrl, budget);
+ 
+
+  createBudget(budget: { category: string; budgetAssigned: number }): Observable<any> {
+    return this.http.post<any>(this.apiUrl, budget);
+  }
+
+  // Fetch all budgets
+  getAllBudgets(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  // Fetch utilized budgets
+  getUtilizedBudgets(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/utilized`);
   }
 }

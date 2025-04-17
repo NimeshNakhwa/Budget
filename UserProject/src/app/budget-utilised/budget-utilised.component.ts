@@ -1,31 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { BudgetService } from '../services/budget.service';
 
 @Component({
   standalone: true,
   selector: 'app-budget-utilised',
   templateUrl: './budget-utilised.component.html',
   styleUrls: ['./budget-utilised.component.css'],
-  imports: [CommonModule, FormsModule]  // ✅ Import CommonModule & FormsModule
+  imports: [CommonModule]
 })
-export class BudgetUtilisedComponent {
-  selectedEvent: string = '';
-  events: string[] = ['CSI', 'IT', 'EXTX', 'Tsdw'];
-  utilizedAmount: number = 0;
-  showSuccess: boolean = false;
+export class BudgetUtilisedComponent implements OnInit {
+  rawBudgets: any[] = []; // To store the raw response data
 
-  submitUtilization() {
-    if (this.selectedEvent && this.utilizedAmount > 0) {
-      console.log(`Event: ${this.selectedEvent}, Utilized Amount: ${this.utilizedAmount}`);
-      this.showSuccess = true;
+  constructor(private budgetService: BudgetService) {}
 
-      // Hide success message after 3 seconds
-      setTimeout(() => {
-        this.showSuccess = false;
-      }, 3000);
-    } else {
-      alert('Please select an event and enter a valid amount.');
-    }
+  ngOnInit() {
+    this.fetchUtilizedBudgets();
+  }
+
+  fetchUtilizedBudgets() {
+    this.budgetService.getAllBudgets().subscribe({
+      next: (response) => {
+        console.log('Fetched utilized budgets:', response);
+        this.rawBudgets = response; // Store the raw response data
+      },
+      error: (error) => {
+        console.error('Error fetching utilized budgets:', error);
+        alert('Failed to fetch utilized budgets. Please try again.');
+      }
+    });
   }
 }

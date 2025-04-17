@@ -1,4 +1,3 @@
-// filepath: c:\Users\Nimesh\Desktop\Frontend fsd\Budget\UserProject\src\app\budget-allocated\budget-allocated.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,28 +20,24 @@ export class BudgetAllocatedComponent {
 
   allocateBudget() {
     if (this.allocatedCategory && this.allocatedAmount > 0) {
-      const budget = {
-        category: this.allocatedCategory,
-        amount: this.allocatedAmount
+      // Adjust the payload to match the backend's expected format
+      const payload = {
+        budgetAssigned: this.allocatedAmount, // Use "amount" to match the service's expected type
+        category: this.allocatedCategory
       };
 
-      this.budgetService.createBudget(budget).subscribe({
+      this.budgetService.createBudget(payload).subscribe({
         next: (response) => {
-          console.log('Budget created successfully:', response);
+          console.log('Budget allocated successfully:', response);
           this.showSuccess = true;
-
-          // Hide success message after 3 seconds
-          setTimeout(() => {
-            this.showSuccess = false;
-          }, 3000);
         },
         error: (error) => {
-          console.error('Error creating budget:', error);
-          alert('Failed to create budget. Please try again.');
+          console.error('Error allocating budget:', error);
+          alert('Failed to allocate budget. Please try again.');
         }
       });
     } else {
-      alert('Please select a category and enter a valid amount.');
+      alert('Please fill in all fields correctly.');
     }
   }
 }
