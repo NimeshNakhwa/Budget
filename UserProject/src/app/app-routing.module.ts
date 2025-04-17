@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path:'dashboard',
-    component: LandingComponent,
+    loadChildren: () => import('./dashboard/dashboard.module').then((m)=>m.DashboardModule),
   },
   {
     path:'budeget_allocated',
@@ -26,11 +26,9 @@ const routes: Routes = [
     component: BudgetUtilisedComponent,
   },
   {
-    path:'dashboard',
+    path:'clubs',
     loadChildren: () => import('./dashboard/dashboard.module').then((m)=>m.DashboardModule),
   }
-
-
 ];
 
 @NgModule({

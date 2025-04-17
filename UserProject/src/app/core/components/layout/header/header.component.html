@@ -1,9 +1,8 @@
-<html lang="en">
-  <body>
-    <nav class="navbar bg-dark">
-      <h1 routerLink="/dashboard"><i class="fas fa-code"></i> Budget</h1>
-      <!--  <li><a [routerLink]="['/auth/register']">Register</a></li> -->
-      <li><a [routerLink]="['/auth/login']">Login</a></li> 
-    </nav>
-  </body>
-</html>
+<nav class="navbar">
+  <h1 routerLink="/dashboard">{{ applicationName }}</h1>
+  <ul>
+    <li><a [routerLink]="['/']">Home</a></li>
+    <li><a [routerLink]="['/auth/register']">Register</a></li>
+    <li><a [routerLink]="['/auth/login']">Login</a></li>
+  </ul>
+</nav>
