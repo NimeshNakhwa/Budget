@@ -13,7 +13,7 @@ import { BudgetService } from '../services/budget.service';
 export class BudgetAllocatedComponent {
   allocatedAmount: number = 0;
   allocatedCategory: string = '';
-  categories: string[] = ['Marketing', 'Operations', 'Development', 'HR'];
+  categories: string[] = ['CSI', 'TSDW', 'Development', 'HR'];
   showSuccess: boolean = false;
 
   constructor(private budgetService: BudgetService) {}

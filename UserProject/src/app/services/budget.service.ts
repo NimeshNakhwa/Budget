@@ -10,8 +10,6 @@ export class BudgetService {
 
   constructor(private http: HttpClient) {}
 
- 
-
   createBudget(budget: { category: string; budgetAssigned: number }): Observable<any> {
     return this.http.post<any>(this.apiUrl, budget);
   }
@@ -24,5 +22,15 @@ export class BudgetService {
   // Fetch utilized budgets
   getUtilizedBudgets(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/utilized`);
+  }
+
+  // Delete a budget
+  deleteBudget(budgetId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${budgetId}`);
+  }
+
+  // Update a budget
+  updateBudget(budgetId: number, budgetDetails: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${budgetId}`, budgetDetails);
   }
 }
